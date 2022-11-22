@@ -12,9 +12,9 @@
       2. Add an Event listener for the submit button, which will display the score and highlight 
          the correct answers when the button is clicked. Use the code from lines 67 to 86 to help you.
 
-      3. Add 2 more questions to the app (each question must have 4 options).
+      3. Add 2 more questions to the app (each question must have 4 options). [DONE!]
 
-      4. Reload the page when the reset button is clicked (hint: search window.location)
+      4. Reload the page when the reset button is clicked (hint: search window.location) [DONE!]
 
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 *************************** */
@@ -43,6 +43,16 @@ window.addEventListener('DOMContentLoaded', () => {
       q: 'What is the capital of Australia',
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
+    },
+    {
+      q: 'Which country landed on the moon first?',
+      o: ['Russia', 'China', 'USA', 'France'],
+      a: 2,
+    },
+    {
+      q: 'Who was the father of computers?',
+      o: ['Charles Babbage', 'Richard Hamming', 'Alan Turing', 'Steve Jobs'],
+      a: 0,
     },
   ];
 
@@ -76,15 +86,46 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (quizItem.a == i) {
           //change background color of li element here
+          document.body.style.backgroundColor = 'green';
         }
 
         if (radioElement.checked) {
           // code for task 1 goes here
+          
         }
       }
     });
   };
 
+  const submit = document.querySelector('#btnSubmit');
+  submit.addEventListener('click', function (e) {
+    submit.style.display = 'none';
+  const displayScore = document.querySelector('#score');
+    displayScore.textContent = `Your Total score is `;
+  });
+
+  let countdownDate = new Date('01:00').getMinutes();
+  const timer = document.getElementById("timer");
+  
+  const startCountdown = () => {
+    const now = new Date().getTime();
+    const countdown = new Date().getTime();
+
+    const difference = (countdown - now) / 1000;
+
+    let minutes = Math.floor((difference % (60 * 60)) / 60);
+    let seconds = Math.floor(difference % 60);
+
+    const formatTime = (time, string) => {
+      return time == 1 ? `${time} ${string}` : `${time} ${string}s`;
+    }
+  }
+
+  const reset = document.querySelector('#btnReset');
+  reset.addEventListener('click', function(e) {
+    window.location.reload();
+  });
   // call the displayQuiz function
   displayQuiz();
+  startCountdown();
 });
